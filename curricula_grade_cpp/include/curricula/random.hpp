@@ -31,30 +31,36 @@ std::vector<TInteger> make_random_number_vector(Seed seed, size_t size, TInteger
 		if (duplicates || covered.find(choice) == covered.end())
 		{
 			covered.insert(choice);
-            result.push_back(choice);
+			result.push_back(choice);
 		}
 	}
 
 	return result;
 }
 
+
+std::vector<Seed> make_random_seed_vector(size_t count, Seed seed)
+{
+	return make_random_number_vector<Seed>(count, 0, 10 * static_cast<Seed>(count), seed, false);
+}
+
 // Create a random sequence composed of the given elements repeated in random order
 template<typename T>
 std::vector<T> make_random_shuffle(Seed seed, size_t size, std::vector<T> const& deck, bool duplicates)
 {
-    if (!duplicates && deck.size() < size)
-    {
-        throw std::length_error("cannot generate shuffle of length without duplicates");
-    }
+	if (!duplicates && deck.size() < size)
+	{
+			throw std::length_error("cannot generate shuffle of length without duplicates");
+	}
 
 	// Set up random number generator
 	std::mt19937 engine;
 	engine.seed(seed);
 	std::uniform_int_distribution<size_t> distributor(0, deck.size() - 1);
 
-    // Generate
+	// Generate
 	std::vector<T> result(size);
-    std::set<size_t> covered;
+	std::set<size_t> covered;
 
 	while (result.size() < size)
 	{
@@ -62,8 +68,8 @@ std::vector<T> make_random_shuffle(Seed seed, size_t size, std::vector<T> const&
 		if (duplicates || covered.find(deck[index]) == covered.end())
 		{
 			covered.insert(index);
-		    result.push_back(deck[index]);
-        }
+			result.push_back(deck[index]);
+		}
 	}
 
 	return result;

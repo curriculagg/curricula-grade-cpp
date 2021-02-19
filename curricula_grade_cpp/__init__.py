@@ -5,4 +5,4 @@ root = Path(__file__).absolute().parent
 
 class Paths:
     INCLUDE = root.joinpath("include")
-    GTEST = root.joinpath("gtest")
+    GTEST = root.joinpath("gtest", "gtest.cpp")

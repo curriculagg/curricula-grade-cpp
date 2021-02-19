@@ -30,7 +30,7 @@ def build_submission(source: Path, resources: dict) -> SetupResult:
     return result
 
 
-@grader.register()
+@grader.register(passing={"build_submission"})
 def test_simple_addition(binary: ExecutableFile) -> CorrectnessResult:
     """Check 1 + 1."""
 
@@ -45,7 +45,7 @@ def test_simple_addition(binary: ExecutableFile) -> CorrectnessResult:
     return CorrectnessResult(passing=True)
 
 
-@grader.register[CleanupResult](tags={"sanity"}, graded=False)
+@grader.register[CleanupResult](passing={"build_submission"}, tags={"sanity"}, graded=False)
 def cleanup_submission(binary: ExecutableFile):
     """Delete the binary."""
 
