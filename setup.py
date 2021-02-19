@@ -15,7 +15,7 @@ module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 
 setup(
-    name="curricula",
+    name="curricula_grade_cpp",
     version=module.version,
     description="A set of grading addons specific to C++",
     url="https://github.com/curriculagg/curricula-grade-cpp",
@@ -31,7 +31,7 @@ setup(
 
     # Packaging
     packages=find_packages(),
-    package_data={"curricula": [
+    package_data={"curricula_grade_cpp": [
         "include/*.hpp",
         "include/**/*.hpp",
         "gtest/*.cpp"]},
