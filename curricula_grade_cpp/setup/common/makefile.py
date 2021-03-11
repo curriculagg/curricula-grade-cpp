@@ -27,8 +27,8 @@ def makefile_execute(
         timeout: float = None) -> SetupResult:
     """Run make on the target directory."""
 
-    runtime = process.run("make", "-B", "-C", str(target_path), *make_options, timeout=timeout)
+    runtime = process.run("make", "-C", str(target_path), *make_options, timeout=timeout)
     if runtime.code != 0 or runtime.timed_out:
         error = f"failed to make {target_path.parts[-1]}"
-        return SetupResult(passing=False, error=Error(description=error), runtime=runtime.dump())
-    return SetupResult(passing=True, runtime=runtime.dump())
+        return SetupResult(passing=False, error=Error(description=error), details=dict(runtime=runtime.dump()))
+    return SetupResult(passing=True, details=dict(runtime=runtime.dump()))

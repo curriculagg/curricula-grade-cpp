@@ -51,13 +51,13 @@ def gpp_compile_object(
     # If the build failed
     if error_description is not None:
         error = Error(description=error_description, traceback=error_traceback)
-        return SetupResult(passing=False, runtime=runtime.dump(), error=error), None
+        return SetupResult(passing=False, details=dict(runtime=runtime.dump()), error=error), None
 
     # Chmod
     add_mode(destination_path, stat.S_IXOTH)
 
     # Otherwise
-    return SetupResult(passing=True, runtime=runtime.dump()), ExecutableFile(destination_path)
+    return SetupResult(passing=True, details=dict(runtime=runtime.dump())), ExecutableFile(destination_path)
 
 
 class GppObjectSetup(Configurable, Runnable):
@@ -108,7 +108,7 @@ def gpp_compile_shared_object(
         return (
             SetupResult(
                 passing=False,
-                runtime=runtime.dump(),
+                details=dict(runtime=runtime.dump()),
                 error=Error(description="compilation failed")),
             None)
 
@@ -118,7 +118,7 @@ def gpp_compile_shared_object(
         return (
             SetupResult(
                 passing=False,
-                runtime=runtime.dump(),
+                details=dict(runtime=runtime.dump()),
                 error=Error(description="shared library build failed")),
             None)
 
