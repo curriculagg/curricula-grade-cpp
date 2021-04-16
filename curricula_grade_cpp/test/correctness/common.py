@@ -12,3 +12,9 @@ class GoogleTest(ProcessExecutor, ProcessExitCodeConnector, CompareExitCodeEvalu
 
         super().__init__(*args, **kwargs)
         self.args = (test_name,)
+
+
+class CurriculaTest(ProcessExecutor, ProcessExitCodeConnector, CompareExitCodeEvaluator, CorrectnessRunnable):
+    """Simple correctness test."""
+
+    expected_code = 0

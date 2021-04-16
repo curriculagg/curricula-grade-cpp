@@ -14,8 +14,9 @@
 #define EXPECT_THROW(statement)\
 {\
     bool caught = false;\
-    try { statement; } catch (...) { caught = true; }\
-    if (!caught) { std::cerr << "failed on line " << __LINE__ << std::endl; FAIL; }\
+    try { statement; } catch (...) { PASS; }\
+    std::cerr << "failed on line " << __LINE__ << std::endl;\
+    FAIL;\
 }
 
 #define TEST(name) if (strcmp(argv[1], #name) == 0)

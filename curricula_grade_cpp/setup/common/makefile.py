@@ -29,6 +29,8 @@ def makefile_execute(
 
     runtime = process.run("make", "-C", str(target_path), *make_options, timeout=timeout)
     if runtime.code != 0 or runtime.timed_out:
-        error = f"failed to make {target_path.parts[-1]}"
-        return SetupResult(passing=False, error=Error(description=error), details=dict(runtime=runtime.dump()))
+        error = Error(
+            description=f"failed to make {target_path.parts[-1]}",
+            traceback=runtime.stderr.decode(errors="replace") if runtime.stderr is not None else None)
+        return SetupResult(passing=False, error=error, details=dict(runtime=runtime.dump()))
     return SetupResult(passing=True, details=dict(runtime=runtime.dump()))
