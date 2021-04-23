@@ -37,5 +37,5 @@ setup(
         "gtest/*.cpp"]},
     include_package_data=True,
     zip_safe=False,
-    install_requires=[f"curricula=={module.version}", f"curricula-grade=={module.version}"])
+    install_requires=[f"curricula~={module.version}", f"curricula-grade~={module.version}"])
 
